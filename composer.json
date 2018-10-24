@@ -1,0 +1,30 @@
+{
+    "name": "newscorp-ghfb/wp-precommit-hooks",
+    "description": "Pre-commit hook for WordPress projects",
+    "type": "composer-plugin",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Nikola Reljin",
+            "email": "nikola.reljin@dowjones.com"
+        }
+    ],
+    "require": {
+        "wp-coding-standards/wpcs": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "*",
+        "composer-plugin-api": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DJWP\\WPPreCommitHook\\": "src/"
+        }
+    },
+    "extra": {
+        "class": "DJWP\\WPPreCommitHook\\Plugin"
+    },
+    "scripts": {
+        "install-pre-commit-hook": [
+            "DJWP\\WPPreCommitHook\\Plugin::run"
+        ]
+    }
+}
