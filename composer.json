@@ -32,7 +32,7 @@
           "type": "package",
           "package": {
             "name": "newscorp-ghfb/wp-precommit-hooks",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
               "url": "git@github.com:newscorp-ghfb/wp-precommit-hooks.git",
               "type": "git",
