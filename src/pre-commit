@@ -3,6 +3,16 @@
 PROJECT=`php -r "echo dirname(dirname(dirname(realpath('$0'))));"`
 STAGED_FILES_CMD=`git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.php`
 
+# ESlint test (Javascript)
+ESLINT="node_modules/.bin/eslint"
+pwd
+
+if [[ ! -x "$ESLINT" ]]; then
+  printf "\t\033[41mPlease install ESlint\033[0m (npm install eslint)\n"
+  exit 1
+fi
+
+
 # Determine if a file list is passed
 if [ "$#" -eq 1 ]
 then
@@ -21,7 +31,7 @@ do
     if [ $? != 0 ]
     then
         echo "Fix the error before commit."
-        exit 1
+        #exit 1
     fi
     FILES="$FILES \"$PROJECT/$FILE\""
 done
@@ -46,8 +56,31 @@ do
         echo "Run"
         echo "  ./vendor/bin/phpcbf --standard=\"$RULESET\" $FILES"
         echo "for automatic fix or fix it manually."
-        exit 1
+        #exit 1
     fi
 done
+
+# JavaScript (React) testing.
+STAGED_FILES=($(git diff --cached --name-only --diff-filter=ACM | grep ".jsx\{0,1\}$"))
+
+echo "ESLint'ing ${#STAGED_FILES[@]} files"
+
+if [[ "$STAGED_FILES" = "" ]]; then
+  exit 0
+fi
+
+$ESLINT "${STAGED_FILES[@]}" --fix
+
+ESLINT_EXIT="$?"
+
+# Re-add files since they may have been fixed
+git add "${STAGED_FILES[@]}"
+
+if [[ "${ESLINT_EXIT}" == 0 ]]; then
+  printf "\n\033[42mCOMMIT SUCCEEDED\033[0m\n"
+else
+  printf "\n\033[41mCOMMIT FAILED:\033[0m Fix eslint errors and try again\n"
+  exit 1
+fi
 
 exit $?

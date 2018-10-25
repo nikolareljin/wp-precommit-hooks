@@ -1,0 +1,52 @@
+{
+  "name": "newscorp-ghfb/wp-precommit-hooks",
+  "version": "0.0.1",
+  "description": "Wordpress Pre-commit hooks",
+  "main": "server.js",
+  "author": "Dow Jones",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "pretest": "npm run lint",
+    "postinstall": "npm run build",
+    "lint": "eslint . --fix && npm run stylelint",
+    "stylelint": "stylelint --fix src/**/*.css --config .stylelintrc.json",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "babel-polyfill": "6.26.0",
+    "lodash": "4.17.10",
+    "react": "16.3.2",
+    "react-apollo": "2.1.5",
+    "react-dom": "16.3.2",
+    "react-flexbox-grid": "2.1.2",
+    "react-redux": "5.0.7",
+    "react-router-dom": "4.2.2",
+    "react-scripts": "2.0.5",
+    "react-test-renderer": "16.4.1",
+    "redux": "4.0.0",
+    "request": "2.87.0",
+    "stylelint-config-standard": "18.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-config-wordpress": "^2.0.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jest": "^21.26.1",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-wordpress": "^0.1.0",
+    "npm-fetch": "0.0.9",
+    "npm-run-all": "4.1.3",
+    "stylelint": "9.2.1",
+    "stylelint-config-css-modules": "1.3.0"
+  },
+  "browserslist": [
+    "last 2 major versions",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
