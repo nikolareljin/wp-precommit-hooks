@@ -64,15 +64,16 @@ do
 done
 
 # JavaScript (React) testing.
-STAGED_FILES=($(git diff --cached --name-only --diff-filter=ACM | grep ".jsx\{0,1\}$"))
+echo "ESlint JS Tests"
 
-echo "ESLint'ing ${#STAGED_FILES[@]} files"
+#STAGED_FILES_CMD=($(git diff --cached --name-only --diff-filter=ACM | grep ".jsx\{0,1\}$"))
+STAGED_FILES_CMD=`git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.js`
+
+echo "ESLint'ing ${#STAGED_FILES_CMD[@]} files"
 
 if [[ "$STAGED_FILES" = "" ]]; then
   exit 0
 fi
-
-echo "Checking ESlint Javascript Code Standard Compliance" 
 
 $ESLINT "${STAGED_FILES[@]}" --fix
 
