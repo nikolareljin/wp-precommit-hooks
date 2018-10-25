@@ -1,5 +1,5 @@
 {
-  "name": "newscorp-ghfb/wp-precommit-hooks",
+  "name": "wp-precommit-hooks",
   "version": "0.0.1",
   "description": "Wordpress Pre-commit hooks",
   "main": "server.js",
@@ -9,6 +9,8 @@
   "scripts": {
     "pretest": "npm run lint",
     "postinstall": "npm run build",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-js",
     "lint": "eslint . --fix && npm run stylelint",
     "stylelint": "stylelint --fix src/**/*.css --config .stylelintrc.json",
     "eject": "react-scripts eject"

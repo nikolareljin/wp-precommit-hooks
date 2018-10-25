@@ -26,5 +26,24 @@
         "install-pre-commit-hook": [
             "DJWP\\WPPreCommitHook\\Plugin::run"
         ]
-    }
+    },
+    "repositories": [
+        {
+          "type": "package",
+          "package": {
+            "name": "newscorp-ghfb/wp-precommit-hooks",
+            "version": "dev-master",
+            "source": {
+              "url": "git@github.com:newscorp-ghfb/wp-precommit-hooks.git",
+              "type": "git",
+              "reference": "master"
+            },
+            "autoload": {
+              "psr-0" : {
+                "DJWP\\WPPreCommitHook" : "src"
+              }
+            }
+          }
+        }
+      ]
 }
