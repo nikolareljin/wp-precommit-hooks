@@ -72,6 +72,8 @@ if [[ "$STAGED_FILES" = "" ]]; then
   exit 0
 fi
 
+echo "Checking ESlint Javascript Code Standard Compliance" 
+
 $ESLINT "${STAGED_FILES[@]}" --fix
 
 ESLINT_EXIT="$?"
