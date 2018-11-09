@@ -34,7 +34,7 @@
             "name": "wp-precommit-hooks",
             "version": "1.0.0",
             "source": {
-              "url": "git@github.dowjones.net:cms/wp-precommit-hooks.git",
+              "url": "git@github.com:nikolareljin/wp-precommit-hooks.git",
               "type": "git",
               "reference": "master"
             },
