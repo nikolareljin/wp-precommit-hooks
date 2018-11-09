@@ -1,5 +1,5 @@
 {
-    "name": "newscorp-ghfb/wp-precommit-hooks",
+    "name": "wp-precommit-hooks",
     "description": "Pre-commit hook for WordPress projects",
     "type": "composer-plugin",
     "license": "GPL-3.0",
@@ -31,10 +31,10 @@
         {
           "type": "package",
           "package": {
-            "name": "newscorp-ghfb/wp-precommit-hooks",
+            "name": "wp-precommit-hooks",
             "version": "1.0.0",
             "source": {
-              "url": "git@github.com:newscorp-ghfb/wp-precommit-hooks.git",
+              "url": "git@github.dowjones.net:cms/wp-precommit-hooks.git",
               "type": "git",
               "reference": "master"
             },
