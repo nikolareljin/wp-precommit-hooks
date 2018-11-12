@@ -12,7 +12,8 @@
     "require": {
         "wp-coding-standards/wpcs": "*",
         "dealerdirect/phpcodesniffer-composer-installer": "*",
-        "composer-plugin-api": "^1.0"
+        "composer-plugin-api": "^1.0",
+        "overtrue/phplint": "^1.1"
     },
     "autoload": {
         "psr-4": {
