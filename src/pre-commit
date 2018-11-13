@@ -2,13 +2,24 @@
 
 # install ESlint
 npm install
+composer install
 echo "********************************************"
 
 # install requirements
 REQUIRED_COMPOSER_LIBRARIES=( "overtrue/phplint" "wp-coding-standards/wpcs" "dealerdirect/phpcodesniffer-composer-installer" "composer-plugin-api" )
-for library in "${REQUIRED_COMPOSER_LIBRARIES[@]}"
-    composer require ${library} -vvv
-fi;
+for cl in "${REQUIRED_COMPOSER_LIBRARIES[@]}"
+do
+    echo "Lib: ${cl}"
+    composer require ${cl} -vvv
+done;
+
+REQUIRED_NPM_LIBRARIES=( "eslint" )
+for nl in "${REQUIRED_NPM_LIBRARIES[@]}"
+do
+    echo "Lib: ${nl}"
+    npm install ${nl}
+done;
+
 
 PROJECT=`php -r "echo dirname(dirname(dirname(realpath('$0'))));"`
 STAGED_FILES_CMD=`git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.php`
