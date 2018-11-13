@@ -7,7 +7,7 @@ echo "********************************************"
 # install requirements
 REQUIRED_COMPOSER_LIBRARIES=( "overtrue/phplint" "wp-coding-standards/wpcs" "dealerdirect/phpcodesniffer-composer-installer" "composer-plugin-api" )
 for library in "${REQUIRED_COMPOSER_LIBRARIES[@]}"
-    composer require ${library} -v
+    composer require ${library} -vvv
 fi;
 
 PROJECT=`php -r "echo dirname(dirname(dirname(realpath('$0'))));"`
