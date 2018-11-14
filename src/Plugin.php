@@ -76,6 +76,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws RuntimeException
 	 */
 	private function init() {
+		$instance           = new static();
+		$instance->onDependenciesChangedEvent();
 	}
 
 	/**
