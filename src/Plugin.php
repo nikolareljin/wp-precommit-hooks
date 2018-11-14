@@ -44,10 +44,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws RuntimeException
 	 */
 	public static function run( Event $event ) {
-		$io = $event->getIO();
-		$composer = $event->getComposer();
-		$instance = new static();
-		$instance->io = $io;
+		$io                 = $event->getIO();
+		$composer           = $event->getComposer();
+		$instance           = new static();
+		$instance->io       = $io;
 		$instance->composer = $composer;
 		$instance->init();
 		$instance->onDependenciesChangedEvent();
@@ -63,7 +63,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 */
 	public function activate( Composer $composer, IOInterface $io ) {
 		$this->composer = $composer;
-		$this->io = $io;
+		$this->io       = $io;
 		$this->init();
 	}
 
@@ -86,7 +86,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			ScriptEvents::POST_INSTALL_CMD => array(
 				array( 'onDependenciesChangedEvent', 0 ),
 			),
-			ScriptEvents::POST_UPDATE_CMD => array(
+			ScriptEvents::POST_UPDATE_CMD  => array(
 				array( 'onDependenciesChangedEvent', 0 ),
 			),
 		);
@@ -108,11 +108,20 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			mkdir( $targetDir, 0775, true );
 		}
 
+		// Commit hooks to be installed.
+		$commit_hooks = [
+			'pre-commit',
+			'prepare-commit-msg',
+			'commit-msg'
+		];
+
 		if ( 'WIN' === strtoupper( substr( PHP_OS, 0, 3 ) ) ) {
 			// We currently don’t have a Windows version to install, so let’s just not break anything for now.
 		} else {
-			copy( __DIR__ . DIRECTORY_SEPARATOR . 'pre-commit', $targetDir . DIRECTORY_SEPARATOR . 'pre-commit' );
-			chmod( $targetDir . DIRECTORY_SEPARATOR . 'pre-commit', 0775 );
+			foreach ( $commit_hooks as $hook ) {
+				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $targetDir . DIRECTORY_SEPARATOR . $hook );
+				chmod( $targetDir . DIRECTORY_SEPARATOR . $hook, 0775 );
+			}
 		}
 	}
 }

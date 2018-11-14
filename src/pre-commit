@@ -1,24 +1,24 @@
 #!/bin/bash
 
 # install ESlint
-npm install
-composer install
+npm install 2>&1
+composer install 2>&1
 echo "********************************************"
 
-# install requirements
-REQUIRED_COMPOSER_LIBRARIES=( "overtrue/phplint" "wp-coding-standards/wpcs" "dealerdirect/phpcodesniffer-composer-installer" "composer-plugin-api" )
-for cl in "${REQUIRED_COMPOSER_LIBRARIES[@]}"
-do
-    echo "Lib: ${cl}"
-    composer require ${cl} -vvv
-done;
-
-REQUIRED_NPM_LIBRARIES=( "eslint" )
-for nl in "${REQUIRED_NPM_LIBRARIES[@]}"
-do
-    echo "Lib: ${nl}"
-    npm install ${nl}
-done;
+## install requirements
+#REQUIRED_COMPOSER_LIBRARIES=( "overtrue/phplint" "wp-coding-standards/wpcs" "dealerdirect/phpcodesniffer-composer-installer" "composer-plugin-api" )
+#for cl in "${REQUIRED_COMPOSER_LIBRARIES[@]}"
+#do
+#    echo "Lib: ${cl}"
+#    composer require ${cl} -vvv 2>&1
+#done;
+#
+#REQUIRED_NPM_LIBRARIES=( "eslint" )
+#for nl in "${REQUIRED_NPM_LIBRARIES[@]}"
+#do
+#    echo "Lib: ${nl}"
+#    npm install ${nl} 2>&1
+#done;
 
 
 PROJECT=`php -r "echo dirname(dirname(dirname(realpath('$0'))));"`
@@ -52,7 +52,7 @@ do
     if [ $? != 0 ]; then
         echo "Fix the error before commit."
         #exit 1
-    else 
+    else
         echo "Code is well written. Nice coding! [OK]"
     fi
     FILES="$FILES \"$PROJECT/$FILE\""
@@ -78,7 +78,7 @@ do
         echo "  ./vendor/bin/phpcbf --standard=\"$RULESET\" $FILES"
         echo "for automatic fix or fix it manually."
         #exit 1
-    else 
+    else
         echo "Code is well written. Nice coding! [OK]"
     fi
 done
