@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # install ESlint
-npm install 2>&1
-composer install 2>&1
+#npm install 2>&1
+#composer install 2>&1
 echo "********************************************"
 
 ## install requirements

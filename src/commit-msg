@@ -2,15 +2,20 @@
 
 # Validates whether commit message is of a certain format.
 # Aborts commit if message is unsatisfactory
+message=$1
 
 # Standard commit from Pivotal Tracker [#135316555:Feature]Create Kafka Audit Trail
-commit_standard_regex='[#[a-z]{2,}[\-]?[0-9]{9,}:[a-z]{3,}]:[a-z].+|merge'
+commit_standard_regex='#[a-zA-Z]+([-])?[0-9]*[\s]?.*|merge'
+
 error_message="Aborting commit. Please ensure your commit message meets the
                standard requirement. '[#StoryID:CommitType]Commit Message'
               Use '[#135316555:Feature]Create Kafka Audit Trail' for reference"
 
 
-if ! grep -iqE "$commit_standard_regex" "$1"; then
+# @TODO: for POSIX-compliant systems, this could be used instead:
+#if ! grep -iqE ^$commit_standard_regex$ "${message}"; then
+# for non-POSIX systems:
+if [[ ${message} =~ ^$commit_standard_regex?.*$ ]]; then
     echo "$error_message" >&2
     exit 1
 fi
