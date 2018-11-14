@@ -30,24 +30,5 @@
     "install-pre-commit-hook": [
       "DJWP\\WPPreCommitHook\\Plugin::run"
     ]
-  },
-  "repositories": [
-    {
-      "type": "package",
-      "package": {
-        "name": "wp-precommit-hooks",
-        "version": "1.0.0",
-        "source": {
-          "url": "git@github.com:nikolareljin/wp-precommit-hooks.git",
-          "type": "git",
-          "reference": "master"
-        },
-        "autoload": {
-          "psr-0": {
-            "DJWP\\WPPreCommitHook": "src"
-          }
-        }
-      }
-    }
-  ]
+  }
 }
