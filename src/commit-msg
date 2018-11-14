@@ -18,7 +18,7 @@ error_message="Aborting commit. Please ensure your commit message meets the
 # @TODO: for POSIX-compliant systems, this could be used instead:
 #if ! grep -iqE ^$commit_standard_regex$ "${message}"; then
 # for non-POSIX systems:
-if [[ ${message} =~ ^$commit_standard_regex?.*$ ]]; then
+if [[ ! ${message} =~ ^$commit_standard_regex?.*$ ]]; then
     echo "$error_message" >&2
     exit 1
 fi
