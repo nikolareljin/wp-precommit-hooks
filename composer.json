@@ -1,5 +1,5 @@
 {
-  "name": "wp-precommit-hooks",
+  "name": "nikolareljin/wp-precommit-hooks",
   "description": "Pre-commit hook for WordPress projects",
   "type": "composer-plugin",
   "license": "GPL-3.0",
