@@ -3,7 +3,7 @@
     "description": "Pre-commit hook for WordPress projects",
     "type": "composer-plugin",
     "license": "GPL-3.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "Nikola Reljin",
