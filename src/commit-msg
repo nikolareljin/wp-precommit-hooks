@@ -4,6 +4,9 @@
 # Aborts commit if message is unsatisfactory
 message=$1
 
+echo "----------------- Commit message format check -------------------"
+
+
 # Standard commit from Pivotal Tracker [#135316555:Feature]Create Kafka Audit Trail
 commit_standard_regex='#[a-zA-Z]+([-])?[0-9]*[\s]?.*|merge'
 
@@ -19,3 +22,5 @@ if [[ ${message} =~ ^$commit_standard_regex?.*$ ]]; then
     echo "$error_message" >&2
     exit 1
 fi
+
+echo "------------- Commit message format check completed. --------------"

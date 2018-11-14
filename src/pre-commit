@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# install ESlint
-#npm install 2>&1
-#composer install 2>&1
-echo "********************************************"
+# Make sure you have installed ESlint
+
+echo "----------------- Pre-commit code check -------------------"
 
 ## install requirements
 #REQUIRED_COMPOSER_LIBRARIES=( "overtrue/phplint" "wp-coding-standards/wpcs" "dealerdirect/phpcodesniffer-composer-installer" "composer-plugin-api" )
@@ -108,5 +107,7 @@ else
   printf "\n\033[41mCOMMIT FAILED:\033[0m Fix eslint errors and try again\n"
   exit 1
 fi
+
+echo "----------------- Code check completed. -------------------"
 
 exit $?
