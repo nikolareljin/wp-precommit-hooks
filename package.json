@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Wordpress Pre-commit hooks",
   "main": "server.js",
-  "author": "Dow Jones",
+  "author": "Nikola Reljin",
   "license": "ISC",
   "private": true,
   "scripts": {
