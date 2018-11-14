@@ -6,17 +6,17 @@ message=$1
 
 echo "----------------- Commit message format check -------------------"
 
-
-# Standard commit from Pivotal Tracker [#135316555:Feature]Create Kafka Audit Trail
-commit_standard_regex='#[a-zA-Z]+([-])?[0-9]*[\s]?.*|merge'
+# Regex format for the Commit message (as defined in Jenkins).
+commit_standard_regex='#[a-zA-Z]+([-])?[0-9]([:][)*[\s]?.*|merge'
 
 error_message="Aborting commit. Please ensure your commit message meets the
-               standard requirement. '[#StoryID:CommitType]Commit Message'
-              Use '[#135316555:Feature]Create Kafka Audit Trail' for reference"
+               standard requirement. '#StoryID [-StoryNumber][:Feature] [Commit Message]'
+              Use '#ABC-135316555 Text essage for the commit' for reference"
 
 
 # @TODO: for POSIX-compliant systems, this could be used instead:
 #if ! grep -iqE ^$commit_standard_regex$ "${message}"; then
+
 # for non-POSIX systems:
 if [[ ! ${message} =~ ^$commit_standard_regex?.*$ ]]; then
     echo "$error_message" >&2
