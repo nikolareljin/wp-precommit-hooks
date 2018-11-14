@@ -120,8 +120,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			// We currently don’t have a Windows version to install, so let’s just not break anything for now.
 		} else {
 			foreach ( $commit_hooks as $hook ) {
+				print( "Install commit hook: " . $hook );
 				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $targetDir . DIRECTORY_SEPARATOR . $hook );
 				chmod( $targetDir . DIRECTORY_SEPARATOR . $hook, 0775 );
+				print("Hook installed.");
 			}
 		}
 	}
