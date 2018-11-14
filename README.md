@@ -8,7 +8,7 @@ Will check for the code standards in PHP and JavaScript/React.
 # Include in your projects
 Include the project in your Composer file:
 
-    *newscorp-ghfb/wp-precommit-hooks*
+    *nikolareljin/wp-precommit-hooks*
 
 
 
