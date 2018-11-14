@@ -121,11 +121,11 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		];
 
 		if ( 'WIN' === strtoupper( substr( PHP_OS, 0, 3 ) ) ) {
-			$this->io->write( 'Windows will not run bash scripts. If you have cygwin installed, please copy them manually from the /src folder to your .git/hooks .', true );
+			print( 'Windows will not run bash scripts. If you have cygwin installed, please copy them manually from the /src folder to your .git/hooks .' );
 			// We currently don’t have a Windows version to install, so let’s just not break anything for now.
 		} else {
 			foreach ( $commit_hooks as $hook ) {
-				$this->io->write( 'Install commit hook: ' . $hook, true );
+				print( 'Install commit hook: ' . $hook );
 				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $targetDir . DIRECTORY_SEPARATOR . $hook );
 				chmod( $targetDir . DIRECTORY_SEPARATOR . $hook, 0775 );
 			}
