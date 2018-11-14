@@ -7,7 +7,7 @@ message=$1
 echo "----------------- Commit message format check -------------------"
 
 # Regex format for the Commit message (as defined in Jenkins).
-commit_standard_regex='#[a-zA-Z]+([-])?[0-9]*[\s]?.*|merge'
+commit_standard_regex='#[a-zA-Z]*([\-])?[0-9]*(\s)?(.*)|merge'
 
 error_message="Aborting commit. Please ensure your commit message meets the
                standard requirement. '#StoryID [-StoryNumber][:Feature] [Commit Message]'
