@@ -50,7 +50,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		$instance->io       = $io;
 		$instance->composer = $composer;
 		$instance->init();
-		$instance->onDependenciesChangedEvent();
+//		$instance->onDependenciesChangedEvent();
 	}
 
 	/**
@@ -76,6 +76,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws RuntimeException
 	 */
 	private function init() {
+		// Added to copy the files to .git/hooks.
 		$instance           = new static();
 		$instance->onDependenciesChangedEvent();
 	}
