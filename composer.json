@@ -1,51 +1,53 @@
 {
-    "name": "wp-precommit-hooks",
-    "description": "Pre-commit hook for WordPress projects",
-    "type": "composer-plugin",
-    "license": "GPL-3.0",
-    "version": "1.0.2",
-    "authors": [
-        {
-            "name": "Nikola Reljin",
-            "email": "nikola.reljin@dowjones.com"
-        }
-    ],
-    "require": {
-        "wp-coding-standards/wpcs": "*",
-        "dealerdirect/phpcodesniffer-composer-installer": "*",
-        "composer-plugin-api": "^1.0",
-        "overtrue/phplint": "^1.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "DJWP\\WPPreCommitHook\\": "src/"
-        }
-    },
-    "extra": {
-        "class": "DJWP\\WPPreCommitHook\\Plugin"
-    },
-    "scripts": {
-        "install-pre-commit-hook": [
-            "DJWP\\WPPreCommitHook\\Plugin::run"
-        ]
-    },
-    "repositories": [
-        {
-          "type": "package",
-          "package": {
-            "name": "wp-precommit-hooks",
-            "version": "1.0.0",
-            "source": {
-              "url": "git@github.com:nikolareljin/wp-precommit-hooks.git",
-              "type": "git",
-              "reference": "master"
-            },
-            "autoload": {
-              "psr-0" : {
-                "DJWP\\WPPreCommitHook" : "src"
-              }
-            }
+  "name": "wp-precommit-hooks",
+  "description": "Pre-commit hook for WordPress projects",
+  "type": "composer-plugin",
+  "license": "GPL-3.0",
+  "version": "1.0.2",
+  "authors": [
+    {
+      "name": "Nikola Reljin",
+      "email": "nikola.reljin@dowjones.com"
+    }
+  ],
+  "require": {
+    "composer-plugin-api": "^1.1",
+    "wp-coding-standards/wpcs": "*",
+    "dealerdirect/phpcodesniffer-composer-installer": "*",
+    "overtrue/phplint": "^1.1",
+    "php-mock/php-mock-phpunit": ">=0.3",
+    "phpunit/phpunit": "^4.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "DJWP\\WPPreCommitHook\\": "src/"
+    }
+  },
+  "extra": {
+    "class": "DJWP\\WPPreCommitHook\\Plugin"
+  },
+  "scripts": {
+    "install-pre-commit-hook": [
+      "DJWP\\WPPreCommitHook\\Plugin::run"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "wp-precommit-hooks",
+        "version": "1.0.0",
+        "source": {
+          "url": "git@github.com:nikolareljin/wp-precommit-hooks.git",
+          "type": "git",
+          "reference": "master"
+        },
+        "autoload": {
+          "psr-0": {
+            "DJWP\\WPPreCommitHook": "src"
           }
         }
-      ]
+      }
+    }
+  ]
 }
