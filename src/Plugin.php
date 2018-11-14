@@ -112,7 +112,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		$commit_hooks = [
 			'pre-commit',
 			'prepare-commit-msg',
-			'commit-msg'
+			'commit-msg',
+			'pre-push'
 		];
 
 		if ( 'WIN' === strtoupper( substr( PHP_OS, 0, 3 ) ) ) {
