@@ -128,7 +128,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		} else {
 			print( "Install commit hooks \n" );
 			foreach ( $commit_hooks as $hook ) {
-				print( $hook );
+				print( ' ' . $hook . ' ' );
 				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $targetDir . DIRECTORY_SEPARATOR . $hook );
 				chmod( $targetDir . DIRECTORY_SEPARATOR . $hook, 0775 );
 			}
