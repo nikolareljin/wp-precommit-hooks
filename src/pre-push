@@ -3,11 +3,12 @@
 source ./.git/hooks/include.sh
 
 branch=$(git rev-parse --abbrev-ref HEAD)
-userRepo=$(git remote -v | grep fetch | awk '{print $2}' | grep "github.com" | cut -d':' -f2 | rev | cut -c5- | rev)
+userRepo=$(git remote -v | grep fetch | awk '{print $2}' | cut -d':' -f2 | rev | cut -c5- | rev)
 
-if [ -n "$userRepo" ]
-then
-    echo ""
-    print_important "Create PR at: https://github.com/$userRepo/compare/$branch?expand=1"
-    echo ""
+repoUrl=$(git ls-remote --get-url origin | cut -f 2 -d @ | cut -f 1 -d ":")
+
+if [ -n "$userRepo" ]; then
+    echo "**"
+    print_important "Create PR at: https://$repoUrl/$userRepo/compare/$branch?expand=1"
+    echo "**"
 fi
