@@ -5,4 +5,4 @@ source ./.git/hooks/include.sh
 # Result will be output in place of the default commit message on running git commit
 current_branch=`git rev-parse --abbrev-ref HEAD`
 
-print_important "#$current_branch Note: commit messages should be of the form: [#StoryID:CommitType] Commit Message." > $1
+print_important "#$current_branch Note: commit messages should be of the form: ${commit_format_example}." > $1

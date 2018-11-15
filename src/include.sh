@@ -1,6 +1,12 @@
 #!/bin/bash
 
 # -----------------------------
+# Regex format for the Commit message (as defined in Jenkins).
+commit_standard_regex='#[a-zA-Z]*([\-])?[0-9]*(\s)?(.*)|merge'
+commit_format_example="#StoryID:CommitType Commit Message"
+commit_message_example="#ABC-135316555 Text essage for the commit"
+
+# -----------------------------
 
 color_end="\033[0m"
 color_black="\033[0;30m"

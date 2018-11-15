@@ -2,7 +2,7 @@
 
 source ./.git/hooks/include.sh
 
-print_important "----------------- Compiling the dependencies -------------------"
+print_important "Compiling the dependencies"
 
 changedFiles="$(git diff-tree -r --name-only --no-commit-id HEAD)"
 
@@ -13,4 +13,4 @@ runOnChange() {
 runOnChange package-lock.json "npm install"
 runOnChange composer.lock "composer install"
 
-print_success "------------ Compile process completed. ---------------"
+print_success "Compile process completed."

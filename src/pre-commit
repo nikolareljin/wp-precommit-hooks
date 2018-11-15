@@ -4,23 +4,7 @@ source ./.git/hooks/include.sh
 
 # Make sure you have installed ESlint
 
-print_important "----------------- Pre-commit code check -------------------"
-
-## install requirements
-#REQUIRED_COMPOSER_LIBRARIES=( "overtrue/phplint" "wp-coding-standards/wpcs" "dealerdirect/phpcodesniffer-composer-installer" "composer-plugin-api" )
-#for cl in "${REQUIRED_COMPOSER_LIBRARIES[@]}"
-#do
-#    echo "Lib: ${cl}"
-#    composer require ${cl} -vvv 2>&1
-#done;
-#
-#REQUIRED_NPM_LIBRARIES=( "eslint" )
-#for nl in "${REQUIRED_NPM_LIBRARIES[@]}"
-#do
-#    echo "Lib: ${nl}"
-#    npm install ${nl} 2>&1
-#done;
-
+print_important "Pre-commit code check"
 
 PROJECT=`php -r "echo dirname(dirname(dirname(realpath('$0'))));"`
 STAGED_FILES_CMD=`git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.php`
@@ -105,13 +89,13 @@ ESLINT_EXIT="$?"
 git add "${STAGED_FILES[@]}"
 
 if [[ "${ESLINT_EXIT}" == 0 ]]; then
-  print_success "COMMIT SUCCEEDED\n"
+  print_success "COMMIT SUCCEEDED"
 else
   print_error "COMMIT FAILED:"
-  print "Fix eslint errors and try again\n"
+  print "Fix eslint errors and try again"
   exit 1
 fi
 
-print_success "----------------- Code check completed. -------------------"
+print_success "Code check completed."
 
 exit $?

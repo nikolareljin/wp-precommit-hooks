@@ -6,14 +6,11 @@ source ./.git/hooks/include.sh
 # Aborts commit if message is unsatisfactory
 message=$1
 
-print_important "----------------- Commit message format check -------------------"
-
-# Regex format for the Commit message (as defined in Jenkins).
-commit_standard_regex='#[a-zA-Z]*([\-])?[0-9]*(\s)?(.*)|merge'
+print_important "Commit message format check"
 
 error_message="Aborting commit. Please ensure your commit message meets the
-               standard requirement. '#StoryID [-StoryNumber][:Feature] [Commit Message]'
-              Use '#ABC-135316555 Text essage for the commit' for reference"
+               standard requirement. '${commit_format_example}'
+              Use '${commit_message_example}' for reference"
 
 
 # @TODO: for POSIX-compliant systems, this could be used instead:
@@ -21,8 +18,8 @@ error_message="Aborting commit. Please ensure your commit message meets the
 
 # for non-POSIX systems:
 if [[ ${message} =~ ^$commit_standard_regex$ ]]; then
+    print_success "Committing the changes"
+else
     print_error "$error_message" >&2
     exit 1
 fi
-
-print_success "------------- Commit message format check completed. --------------"
