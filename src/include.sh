@@ -2,7 +2,9 @@
 
 # -----------------------------
 # Regex format for the Commit message (as defined in Jenkins).
-commit_standard_regex='#[a-zA-Z]*([\-])?[0-9]*(\s)?(.*)|merge'
+#commit_standard_regex='#[a-zA-Z]*([\-])?[0-9]*(\s)?(.*)|merge'
+# @TODO: temporarily allowing all to be passed to commit message. Change this to the correct format of Jira or Bitbucket.
+commit_standard_regex='.*|merge'
 commit_format_example="#StoryID:CommitType Commit Message"
 commit_message_example="#ABC-135316555 Text essage for the commit"
 
