@@ -126,8 +126,9 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			print( 'Windows will not run bash scripts. If you have cygwin installed, please copy them manually from the /src folder to your .git/hooks .' );
 			// We currently don’t have a Windows version to install, so let’s just not break anything for now.
 		} else {
+			print( "Install commit hooks \n" );
 			foreach ( $commit_hooks as $hook ) {
-				print( 'Install commit hook: ' . $hook );
+				print( $hook );
 				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $targetDir . DIRECTORY_SEPARATOR . $hook );
 				chmod( $targetDir . DIRECTORY_SEPARATOR . $hook, 0775 );
 			}
