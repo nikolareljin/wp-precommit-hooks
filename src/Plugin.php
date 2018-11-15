@@ -118,6 +118,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			'pre-commit',
 			'pre-push',
 			'prepare-commit-msg',
+			'include.sh',
+			'compile.sh'
 		];
 
 		if ( 'WIN' === strtoupper( substr( PHP_OS, 0, 3 ) ) ) {
@@ -131,5 +133,5 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			}
 		}
 	}
-	
+
 }

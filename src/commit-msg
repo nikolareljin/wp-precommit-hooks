@@ -1,10 +1,12 @@
 #!/bin/bash
 
+source ./include.sh
+
 # Validates whether commit message is of a certain format.
 # Aborts commit if message is unsatisfactory
 message=$1
 
-echo "----------------- Commit message format check -------------------"
+print_important "----------------- Commit message format check -------------------"
 
 # Regex format for the Commit message (as defined in Jenkins).
 commit_standard_regex='#[a-zA-Z]*([\-])?[0-9]*(\s)?(.*)|merge'
@@ -19,8 +21,8 @@ error_message="Aborting commit. Please ensure your commit message meets the
 
 # for non-POSIX systems:
 if [[ ${message} =~ ^$commit_standard_regex$ ]]; then
-    echo "$error_message" >&2
+    print_error "$error_message" >&2
     exit 1
 fi
 
-echo "------------- Commit message format check completed. --------------"
+print_success "------------- Commit message format check completed. --------------"
