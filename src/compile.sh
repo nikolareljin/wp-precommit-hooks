@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./include.sh
+source ./.git/hooks/include.sh
 
 print_important "----------------- Compiling the dependencies -------------------"
 

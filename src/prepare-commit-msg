@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./include.sh
+source ./.git/hooks/include.sh
 
 # Result will be output in place of the default commit message on running git commit
 current_branch=`git rev-parse --abbrev-ref HEAD`

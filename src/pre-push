@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ./include.sh
+source ./.git/hooks/include.sh
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 userRepo=$(git remote -v | grep fetch | awk '{print $2}' | grep "github.com" | cut -d':' -f2 | rev | cut -c5- | rev)
