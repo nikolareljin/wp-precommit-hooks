@@ -114,7 +114,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 *
 	 * @return string             Path leading from $frompath to $topath
 	 */
-	private function find_relative_path( String $frompath, String $topath ) {
+	private function find_relative_path( String $frompath, String $topath ) : String {
 		$from    = explode( DIRECTORY_SEPARATOR, $frompath ); // Folders/File
 		$to      = explode( DIRECTORY_SEPARATOR, $topath ); // Folders/File
 		$relpath = '';
@@ -152,7 +152,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 *
 	 * @todo Copy a Windows-version of the pre-commit script on WIN platforms.
 	 *
-	 * @param String $vendorDir Location of the vendor-dir as set in the composer.json.
+	 * @param Event $event
 	 *
 	 * @throws \InvalidArgumentException
 	 * @throws RuntimeException
