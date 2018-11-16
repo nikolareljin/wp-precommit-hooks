@@ -153,12 +153,13 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 *
 	 * @todo Copy a Windows-version of the pre-commit script on WIN platforms.
 	 *
+	 * @param String $vendorDir Location of the vendor-dir as set in the composer.json.
 	 * @throws \InvalidArgumentException
 	 * @throws RuntimeException
 	 * @throws LogicException
 	 * @throws ProcessFailedException
 	 */
-	public function onDependenciesChangedEvent( String $vendorDir = null ) {
+	public function onDependenciesChangedEvent( $vendorDir = null ) {
 		// Find TargetDir from the
 		$targetDir = getcwd() . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'hooks';
 
