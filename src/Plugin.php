@@ -58,7 +58,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		$instance           = new static();
 		$instance->io       = $io;
 		$instance->composer = $composer;
-		$instance->init( $event );
+		$instance->init();
+		// Added to copy the files to .git/hooks.
+		$instance = new static();
+		$instance->onDependenciesChangedEvent( $event );
 	}
 
 	/**
@@ -72,9 +75,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	public function activate( Composer $composer, IOInterface $io ) {
 		$this->composer = $composer;
 		$this->io       = $io;
-
-//		$this->configVal = \realpath($composer->getConfig()->get('vendor-dir') . '/../') . '/';
-
 		$this->init();
 	}
 
@@ -88,10 +88,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws ProcessFailedException
 	 * @throws RuntimeException
 	 */
-	private function init( Event $event = null ) {
-		// Added to copy the files to .git/hooks.
-		$instance = new static();
-		$instance->onDependenciesChangedEvent( $event );
+	private function init() {
 	}
 
 	/**
