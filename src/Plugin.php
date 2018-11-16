@@ -53,7 +53,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws RuntimeException
 	 */
 	public static function run( Event $event ) {
-		$vendorDir          = $event->getComposer()->getConfig()->get( 'vendor-dir' );
+		$configVal          = $event->getComposer()->getConfig()->get( 'config' );
+		$vendorDir          = is( $configVal['vendor-dir'] ) ? $configVal['vendor-dir'] : 'vendor';
 		$io                 = $event->getIO();
 		$composer           = $event->getComposer();
 		$instance           = new static();
@@ -154,6 +155,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @todo Copy a Windows-version of the pre-commit script on WIN platforms.
 	 *
 	 * @param String $vendorDir Location of the vendor-dir as set in the composer.json.
+	 *
 	 * @throws \InvalidArgumentException
 	 * @throws RuntimeException
 	 * @throws LogicException
