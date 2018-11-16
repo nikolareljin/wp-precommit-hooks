@@ -72,7 +72,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	public function activate( Composer $composer, IOInterface $io ) {
 		$this->composer = $composer;
 		$this->io       = $io;
-		$this->init();
+
+//		$this->configVal = \realpath($composer->getConfig()->get('vendor-dir') . '/../') . '/';
+
+		$this->init(null);
 	}
 
 	/**
@@ -114,7 +117,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 *
 	 * @return string             Path leading from $frompath to $topath
 	 */
-	private function find_relative_path( String $frompath, String $topath ) : String {
+	private function find_relative_path( String $frompath, String $topath ) {
 		$from    = explode( DIRECTORY_SEPARATOR, $frompath ); // Folders/File
 		$to      = explode( DIRECTORY_SEPARATOR, $topath ); // Folders/File
 		$relpath = '';
