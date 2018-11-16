@@ -27,7 +27,7 @@
     "class": "DJWP\\WPPreCommitHook\\Plugin"
   },
   "scripts": {
-    "install-pre-commit-hook": [
+    "pre-install-cmd": [
       "DJWP\\WPPreCommitHook\\Plugin::run"
     ]
   }
