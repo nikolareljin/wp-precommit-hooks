@@ -53,8 +53,9 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws RuntimeException
 	 */
 	public static function run( Event $event ) {
-		$configVal          = $event->getComposer()->getConfig()->get( 'config' );
-		$vendorDir          = is( $configVal['vendor-dir'] ) ? $configVal['vendor-dir'] : 'vendor';
+		$configVal = $event->getComposer()->getConfig()->get( 'config' );
+		$vendorDir = ( isset( $configVal['vendor-dir'] ) ) ? $configVal['vendor-dir'] : 'vendor';
+		echo( "Vendor dir: " . $vendorDir );
 		$io                 = $event->getIO();
 		$composer           = $event->getComposer();
 		$instance           = new static();
