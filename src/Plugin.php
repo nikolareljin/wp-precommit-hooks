@@ -40,15 +40,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	private $vendorDir;
 
 	/**
-	 * Plugin constructor.
-	 *
-	 * @param Event $event
-	 */
-	public function __construct( Event $event ) {
-		$this->vendorDir = $event->getComposer()->getConfig()->get( 'vendor-dir' );
-	}
-
-	/**
 	 * Triggers the plugin's main functionality.
 	 *
 	 * Makes it possible to run the plugin as a custom command.
