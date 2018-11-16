@@ -4,6 +4,7 @@ namespace DJWP\WPPreCommitHook;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\Installer\LibraryInstaller;
 use Composer\IO\IOInterface;
 use Composer\Package\AliasPackage;
 use Composer\Package\PackageInterface;
@@ -17,8 +18,11 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\ProcessBuilder;
 
+/**
+ * Class Plugin
+ * @package DJWP\WPPreCommitHook
+ */
 class Plugin implements PluginInterface, EventSubscriberInterface {
-
 
 	/**
 	 * @var Composer
@@ -29,6 +33,20 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @var IOInterface
 	 */
 	private $io;
+
+	/**
+	 * @var String specify vendor directory from composer.json.
+	 */
+	private $vendorDir;
+
+	/**
+	 * Plugin constructor.
+	 *
+	 * @param Event $event
+	 */
+	public function __construct( Event $event ) {
+		$this->vendorDir = $event->getComposer()->getConfig()->get( 'vendor-dir' );
+	}
 
 	/**
 	 * Triggers the plugin's main functionality.
@@ -44,13 +62,13 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws RuntimeException
 	 */
 	public static function run( Event $event ) {
+		$vendorDir          = $event->getComposer()->getConfig()->get( 'vendor-dir' );
 		$io                 = $event->getIO();
 		$composer           = $event->getComposer();
 		$instance           = new static();
 		$instance->io       = $io;
 		$instance->composer = $composer;
-		$instance->init();
-//		$instance->onDependenciesChangedEvent();
+		$instance->init( $vendorDir );
 	}
 
 	/**
@@ -70,15 +88,17 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	/**
 	 * Prepares the plugin so it's main functionality can be run.
 	 *
+	 * @param String $vendorDir
+	 *
 	 * @throws \RuntimeException
 	 * @throws LogicException
 	 * @throws ProcessFailedException
 	 * @throws RuntimeException
 	 */
-	private function init() {
+	private function init( String $vendorDir = null ) {
 		// Added to copy the files to .git/hooks.
 		$instance = new static();
-		$instance->onDependenciesChangedEvent();
+		$instance->onDependenciesChangedEvent( $vendorDir );
 	}
 
 	/**
@@ -96,6 +116,48 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	}
 
 	/**
+	 *
+	 * Find the relative file system path between two file system paths
+	 *
+	 * @param  string $frompath Path to start from
+	 * @param  string $topath Path we want to end up in
+	 *
+	 * @return string             Path leading from $frompath to $topath
+	 */
+	private function find_relative_path( String $frompath, String $topath ) {
+		$from    = explode( DIRECTORY_SEPARATOR, $frompath ); // Folders/File
+		$to      = explode( DIRECTORY_SEPARATOR, $topath ); // Folders/File
+		$relpath = '';
+
+		$i = 0;
+		// Find how far the path is the same
+		while ( isset( $from[ $i ] ) && isset( $to[ $i ] ) ) {
+			if ( $from[ $i ] != $to[ $i ] ) {
+				break;
+			}
+			$i ++;
+		}
+		$j = count( $from ) - 1;
+		// Add '..' until the path is the same
+		while ( $i <= $j ) {
+			if ( ! empty( $from[ $j ] ) ) {
+				$relpath .= '..' . DIRECTORY_SEPARATOR;
+			}
+			$j --;
+		}
+		// Go to folder from where it starts differing
+		while ( isset( $to[ $i ] ) ) {
+			if ( ! empty( $to[ $i ] ) ) {
+				$relpath .= $to[ $i ] . DIRECTORY_SEPARATOR;
+			}
+			$i ++;
+		}
+
+		// Strip last separator
+		return substr( $relpath, 0, - 1 );
+	}
+
+	/**
 	 * Entry point for post install and post update events.
 	 *
 	 * @todo Copy a Windows-version of the pre-commit script on WIN platforms.
@@ -105,10 +167,16 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws LogicException
 	 * @throws ProcessFailedException
 	 */
-	public function onDependenciesChangedEvent() {
+	public function onDependenciesChangedEvent( String $vendorDir = null ) {
+		// Find TargetDir from the
 		$targetDir = getcwd() . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'hooks';
-		if ( ! is_dir( $targetDir ) ) {
-			mkdir( $targetDir, 0775, true );
+
+		// Relative path between the value set as vendor-dir and /.git in the local repo.
+		$path_diff = $this->find_relative_path( getcwd() . DIRECTORY_SEPARATOR . $vendorDir, $targetDir );
+		$path_diff .= '.git' . DIRECTORY_SEPARATOR . 'hooks';
+
+		if ( ! is_dir( $path_diff ) ) {
+			mkdir( $path_diff, 0775, true );
 		}
 
 		// Commit hooks to be installed.
@@ -129,8 +197,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			print( "Install commit hooks \n" );
 			foreach ( $commit_hooks as $hook ) {
 				print( ' ' . $hook . ' ' );
-				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $targetDir . DIRECTORY_SEPARATOR . $hook );
-				chmod( $targetDir . DIRECTORY_SEPARATOR . $hook, 0775 );
+				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $path_diff . DIRECTORY_SEPARATOR . $hook );
+				chmod( $path_diff . DIRECTORY_SEPARATOR . $hook, 0775 );
 			}
 		}
 	}
