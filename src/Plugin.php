@@ -76,6 +76,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		$this->composer = $composer;
 		$this->io       = $io;
 		$this->init();
+		$this->vendorDir = rtrim( getcwd() . '/' . $this->composer->getConfig()->get( 'vendor-dir' ), '/' );
 	}
 
 	/**
@@ -161,7 +162,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 */
 	public function onDependenciesChangedEvent( Event $event ) {
 
-		$vendorDir = $event->getComposer()->getConfig()->get( 'vendor-dir' );
+		$vendorDir = $this->vendorDir;
 		var_dump( "Vendor dir: " . $vendorDir );
 
 		// Find TargetDir from the
