@@ -167,10 +167,12 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 
 		// Find TargetDir from the
 		$targetDir = getcwd() . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'hooks';
+		var_dump( ".git destination directory: " . $targetDir );
 
 		// Relative path between the value set as vendor-dir and /.git in the local repo.
 		$path_diff = $this->find_relative_path( getcwd() . DIRECTORY_SEPARATOR . $vendorDir, $targetDir );
 		$path_diff .= '.git' . DIRECTORY_SEPARATOR . 'hooks';
+		var_dump( "Relative diff directory: " . $path_diff );
 
 		if ( ! is_dir( $path_diff ) ) {
 			mkdir( $path_diff, 0775, true );
