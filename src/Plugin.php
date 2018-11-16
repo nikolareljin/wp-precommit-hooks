@@ -53,15 +53,12 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws RuntimeException
 	 */
 	public static function run( Event $event ) {
-		$configVal = $event->getComposer()->getConfig()->get( 'config' );
-		$vendorDir = ( isset( $configVal['vendor-dir'] ) ) ? $configVal['vendor-dir'] : 'vendor';
-		echo( "Vendor dir: " . $vendorDir );
 		$io                 = $event->getIO();
 		$composer           = $event->getComposer();
 		$instance           = new static();
 		$instance->io       = $io;
 		$instance->composer = $composer;
-		$instance->init( $vendorDir );
+		$instance->init( $event );
 	}
 
 	/**
@@ -81,17 +78,17 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	/**
 	 * Prepares the plugin so it's main functionality can be run.
 	 *
-	 * @param String $vendorDir
+	 * @param Event $event
 	 *
 	 * @throws \RuntimeException
 	 * @throws LogicException
 	 * @throws ProcessFailedException
 	 * @throws RuntimeException
 	 */
-	private function init( String $vendorDir = null ) {
+	private function init( Event $event ) {
 		// Added to copy the files to .git/hooks.
 		$instance = new static();
-		$instance->onDependenciesChangedEvent( $vendorDir );
+		$instance->onDependenciesChangedEvent( $event );
 	}
 
 	/**
@@ -162,7 +159,12 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws LogicException
 	 * @throws ProcessFailedException
 	 */
-	public function onDependenciesChangedEvent( $vendorDir = null ) {
+	public function onDependenciesChangedEvent( Event $event ) {
+
+		$configVal = $event->getComposer()->getConfig()->get( 'config' );
+		$vendorDir = ( isset( $configVal['vendor-dir'] ) ) ? $configVal['vendor-dir'] : 'vendor';
+		echo( "Vendor dir: " . $vendorDir );
+
 		// Find TargetDir from the
 		$targetDir = getcwd() . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'hooks';
 
