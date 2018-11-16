@@ -77,6 +77,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		$this->io       = $io;
 		$this->init();
 		$this->vendorDir = rtrim( getcwd() . '/' . $this->composer->getConfig()->get( 'vendor-dir' ), '/' );
+		var_dump("Vendor directory: " . $this->vendorDir);
 	}
 
 	/**
@@ -162,12 +163,12 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 */
 	public function onDependenciesChangedEvent( Event $event ) {
 
-		$vendorDir = $this->vendorDir;
+		$vendorDir = getcwd() . '/' . $this->vendorDir;
 		var_dump( "Vendor dir: " . $vendorDir );
 
 		// Find TargetDir from the
 		$targetDir = getcwd() . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'hooks';
-		var_dump( ".git destination directory: " . $targetDir );
+		var_dump( "git destination directory: " . $targetDir );
 
 		// Relative path between the value set as vendor-dir and /.git in the local repo.
 		$path_diff = $this->find_relative_path( getcwd() . DIRECTORY_SEPARATOR . $vendorDir, $targetDir );
