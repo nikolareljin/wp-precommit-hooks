@@ -75,7 +75,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 
 //		$this->configVal = \realpath($composer->getConfig()->get('vendor-dir') . '/../') . '/';
 
-		$this->init(null);
+		$this->init();
 	}
 
 	/**
@@ -88,7 +88,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws ProcessFailedException
 	 * @throws RuntimeException
 	 */
-	private function init( Event $event ) {
+	private function init( Event $event = null ) {
 		// Added to copy the files to .git/hooks.
 		$instance = new static();
 		$instance->onDependenciesChangedEvent( $event );
