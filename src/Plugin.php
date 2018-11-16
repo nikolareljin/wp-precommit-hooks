@@ -162,21 +162,15 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 * @throws ProcessFailedException
 	 */
 	public function onDependenciesChangedEvent( Event $event ) {
-
-		$vendorDir = getcwd() . '/' . $this->vendorDir;
+		$vendorDir = $this->vendorDir;
 		var_dump( "Vendor dir: " . $vendorDir );
 
 		// Find TargetDir from the
 		$targetDir = getcwd() . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'hooks';
-		var_dump( "git destination directory: " . $targetDir );
+		var_dump( ".git destination directory: " . $targetDir );
 
-		// Relative path between the value set as vendor-dir and /.git in the local repo.
-		$path_diff = $this->find_relative_path( getcwd() . DIRECTORY_SEPARATOR . $vendorDir, $targetDir );
-		$path_diff .= '.git' . DIRECTORY_SEPARATOR . 'hooks';
-		var_dump( "Relative diff directory: " . $path_diff );
-
-		if ( ! is_dir( $path_diff ) ) {
-			mkdir( $path_diff, 0775, true );
+		if ( ! is_dir( $targetDir ) ) {
+			mkdir( $targetDir, 0775, true );
 		}
 
 		// Commit hooks to be installed.
@@ -197,8 +191,8 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			print( "Install commit hooks \n" );
 			foreach ( $commit_hooks as $hook ) {
 				print( ' ' . $hook . ' ' );
-				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $path_diff . DIRECTORY_SEPARATOR . $hook );
-				chmod( $path_diff . DIRECTORY_SEPARATOR . $hook, 0775 );
+				copy( __DIR__ . DIRECTORY_SEPARATOR . $hook, $targetDir . DIRECTORY_SEPARATOR . $hook );
+				chmod( $targetDir . DIRECTORY_SEPARATOR . $hook, 0775 );
 			}
 		}
 	}
