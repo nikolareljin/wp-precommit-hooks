@@ -162,8 +162,9 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	public function onDependenciesChangedEvent( Event $event ) {
 
 		$configVal = $event->getComposer()->getConfig()->get( 'config' );
+		var_dump($configVal);
 		$vendorDir = ( isset( $configVal['vendor-dir'] ) ) ? $configVal['vendor-dir'] : 'vendor';
-		echo( "Vendor dir: " . $vendorDir );
+		var_dump( "Vendor dir: " . $vendorDir );
 
 		// Find TargetDir from the
 		$targetDir = getcwd() . DIRECTORY_SEPARATOR . '.git' . DIRECTORY_SEPARATOR . 'hooks';
