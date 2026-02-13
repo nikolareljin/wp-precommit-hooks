@@ -4,6 +4,8 @@ WP Pre-Commit Hooks
 
 Will check for the code standards in PHP and JavaScript/React.
 
+Node.js requirement: `20.x`
+
 
 # Include in your projects
 Include the project in your Composer file:
@@ -47,3 +49,7 @@ In the terminal, run:
 `npm install`
 
 `composer install`
+
+## Available npm scripts
+
+`npm run build` - no-op placeholder in this package (no frontend build output is produced here).
