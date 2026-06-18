@@ -53,3 +53,11 @@ In the terminal, run:
 ## Available npm scripts
 
 `npm run build` - no-op placeholder in this package (no frontend build output is produced here).
+
+---
+
+## Clone traffic
+
+![Clone traffic](https://raw.githubusercontent.com/nikolareljin/stats/main/charts/wp-precommit-hooks.svg)
+
+_Updated daily. Total and unique cloners over the last 14 days._
